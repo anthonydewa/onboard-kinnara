@@ -10,10 +10,8 @@ public class ProductStock {
     private String quantityOnHand;
     private String _id;
 
-    public ProductStock(String storageBin$_identifier, String product$_identifier, String quantityOnHand) {
-        this.storageBin$_identifier = storageBin$_identifier;
-        this.product$_identifier = product$_identifier;
-        this.quantityOnHand = quantityOnHand;
+    public ProductStock() {
+        super();
     }
 
     public String getStorageBin$_identifier() {

@@ -1,54 +1,60 @@
 package com.example.onboarding.services;
 
+import com.example.onboarding.httpmodelresponses.ProductStockResponse;
 import com.example.onboarding.models.ProductStock;
 import com.example.onboarding.models.ProductStockSummary;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpException;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/* API endpoint response class */
-class ProductStockResponse {
-    private String digest;
-    private int total;
-    private List<ProductStock> data;
-
-    public String getDigest() {
-        return digest;
-    }
-
-    public void setDigest(String digest) {
-        this.digest = digest;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public List<ProductStock> getData() {
-        return data;
-    }
-
-    public void setData(List<ProductStock> data) {
-        this.data = data;
-    }
-}
-
 @Service
 public class StockService {
     public List<ProductStockSummary> StockSummary() {
+
         /*Get JSON data from API endpoint*/
         String productStockUrl = "https://sandbox.kecak.org/web/json/data/app/emkfast/datalist/productStock";
-        RestClient restClient = RestClient.builder().build();
 
-        ProductStockResponse productStockResponse = restClient.get().uri(productStockUrl).retrieve().body(ProductStockResponse.class);
+        /*Apache HttpClient*/
+        ProductStockResponse productStockResponse;
+        try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
+            HttpClientResponseHandler<ProductStockResponse> handler = classicHttpResponse -> {
+                int status = classicHttpResponse.getCode();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = classicHttpResponse.getEntity();
+                    if(entity == null) {
+                        return null;
+                    } else {
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        return objectMapper.readValue(entity.getContent(), ProductStockResponse.class);
+                    }
+                } else {
+                    return null;
+                }
+            };
+
+            productStockResponse = httpClient.execute(new HttpGet(productStockUrl), handler);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        /*REST Client*/
+        // RestClient restClient = RestClient.builder().build();
+        // ProductStockResponse productStockResponse = restClient.get().uri(productStockUrl).retrieve().body(ProductStockResponse.class);
 
         List<ProductStock> productStocks;
         if (productStockResponse != null) {
