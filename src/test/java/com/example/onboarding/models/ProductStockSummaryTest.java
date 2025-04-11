@@ -1,4 +1,4 @@
 package com.example.onboarding.models;
 
-public class ProductStockSummaryTests {
+public class ProductStockSummaryTest {
 }

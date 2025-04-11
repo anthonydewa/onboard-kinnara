@@ -1,4 +1,4 @@
 package com.example.onboarding.controllers;
 
-public class CSVReaderControllerTests {
+public class StockControllerTest {
 }
