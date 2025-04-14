@@ -38,4 +38,9 @@ public class ProductStockSummary {
     public void setStorageBin$_identifier(String storageBin$_identifier) {
         this.storageBin$_identifier = storageBin$_identifier;
     }
+
+    @Override
+    public String toString() {
+        return this.storageBin$_identifier + this.formattedProduct$_identifier;
+    }
 }
