@@ -5,6 +5,16 @@ public class ProductStockSummary {
     private String formattedProduct$_identifier;
     private Long totalQuantity;
 
+    public ProductStockSummary(String storageBin$_identifier, String formattedProduct$_identifier, Long totalQuantity) {
+        this.storageBin$_identifier = storageBin$_identifier;
+        this.formattedProduct$_identifier = formattedProduct$_identifier;
+        this.totalQuantity = totalQuantity;
+    }
+
+    public ProductStockSummary() {
+
+    }
+
     public Long getTotalQuantity() {
         return totalQuantity;
     }
