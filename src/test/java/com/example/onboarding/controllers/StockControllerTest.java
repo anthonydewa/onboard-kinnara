@@ -29,19 +29,6 @@ public class StockControllerTest {
     @Test
     @DisplayName("GET /stock/summary - 200 OK")
     void stockSummaryTest() throws Exception {
-        String jsonReturn = """
-                {
-                		"storageBin$_identifier": "XYZ",
-                		"formattedProduct$_identifier": "Product 1",
-                		"totalQuantity": 123
-                	},
-                	{
-                		"storageBin$_identifier": "ABC",
-                		"formattedProduct$_identifier": "Product 1",
-                		"totalQuantity": 99
-                	}
-                """;
-
         ProductStockSummary summary1 = new ProductStockSummary("XYZ", "Product 1", 123L);
         ProductStockSummary summary2 = new ProductStockSummary("ABC", "Product 2", 99L);
         when(service.StockSummary()).thenReturn(Arrays.asList(summary1, summary2));
