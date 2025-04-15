@@ -1,31 +1,29 @@
 package com.example.onboarding.controllers;
 
+import com.example.onboarding.dtos.EmployeeDTO;
 import com.example.onboarding.models.Employee;
-import com.example.onboarding.repositories.EmployeeRepository;
+import com.example.onboarding.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<Employee> create(@RequestBody Employee employee) {
-        Employee savedEmployee = employeeRepository.save(employee);
-        return new ResponseEntity<>(savedEmployee, HttpStatusCode.valueOf(201));
+    public ResponseEntity<Employee> create(@Validated @RequestBody EmployeeDTO employeeDTO) {
+        Employee savedEmployee = employeeService.employeeCreate(employeeDTO);
+        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Employee> get_by_id(@PathVariable("id") Integer id) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-
-        return employee.map(value -> new ResponseEntity<>(value, HttpStatusCode.valueOf(200)))
-                       .orElseGet(() -> new ResponseEntity<>(null, HttpStatusCode.valueOf(404)));
+        Employee employee = employeeService.employeeGetByIdD(id);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 }

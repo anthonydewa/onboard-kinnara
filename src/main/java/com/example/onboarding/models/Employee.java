@@ -21,7 +21,6 @@ public class Employee {
     private String telegram;
 
     public Employee() {
-        this.id = 0;
         this.name = "";
         this.email = "";
         this.telegram = "";
@@ -29,6 +28,12 @@ public class Employee {
 
     public Employee(int id, String name, String email, String telegram) {
         this.id = id;
+        this.name = name;
+        this.email = email;
+        this.telegram = telegram;
+    }
+
+    public Employee(String name, String email, String telegram) {
         this.name = name;
         this.email = email;
         this.telegram = telegram;
