@@ -35,6 +35,13 @@ public class EmployeeTest {
         Assertions.assertEquals("aw@com", employee.getEmail());
         Assertions.assertEquals("ant", employee.getName());
         Assertions.assertEquals("000012345678", employee.getTelegram());
+
+        Employee employee2 = new Employee("an", "aw@co", "0000123456789");
+
+        Assertions.assertEquals(0, employee2.getId());
+        Assertions.assertEquals("aw@co", employee2.getEmail());
+        Assertions.assertEquals("an", employee2.getName());
+        Assertions.assertEquals("0000123456789", employee2.getTelegram());
     }
 
     @Test
