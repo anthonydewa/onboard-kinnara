@@ -5,6 +5,15 @@ public class EmployeeDTO {
     private String email;
     private String telegram;
 
+    public EmployeeDTO() {
+    }
+
+    public EmployeeDTO(String name, String email, String telegram) {
+        this.name = name;
+        this.email = email;
+        this.telegram = telegram;
+    }
+
     public String getName() {
         return name;
     }

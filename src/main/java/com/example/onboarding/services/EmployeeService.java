@@ -1,5 +1,6 @@
 package com.example.onboarding.services;
 
+import com.example.onboarding.dtomappers.EmployeeMapper;
 import com.example.onboarding.dtos.EmployeeDTO;
 import com.example.onboarding.models.Employee;
 import com.example.onboarding.repositories.EmployeeRepository;
@@ -15,8 +16,12 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private EmployeeMapper employeeMapper;
+
     public Employee employeeCreate(EmployeeDTO employeeDTO) {
-        return employeeRepository.save(employeeCreateDTOToEmployee(employeeDTO));
+        Employee employee = employeeMapper.employeeCreateDTOToEmployee(employeeDTO);
+        return employeeRepository.save(employee);
     }
 
     public Employee employeeGetByIdD(int id) {
@@ -27,9 +32,5 @@ public class EmployeeService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found");
         }
-    }
-
-    private Employee employeeCreateDTOToEmployee(EmployeeDTO employeeDTO) {
-        return new Employee(employeeDTO.getName(), employeeDTO.getEmail(), employeeDTO.getTelegram());
     }
 }
