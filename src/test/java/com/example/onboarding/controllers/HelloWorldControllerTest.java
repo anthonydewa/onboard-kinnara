@@ -21,7 +21,7 @@ public class HelloWorldControllerTest {
     @Test
     @DisplayName("GET / - 200 OK")
     void helloWorldTest() throws Exception {
-        this.mockMvc.perform(get("/"))
+        mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Hello")));
     }

@@ -19,7 +19,7 @@ public class CSVReaderControllerTest {
     @Test
     @DisplayName("GET /csv - 200 OK")
     void csvReaderTest() throws Exception {
-        this.mockMvc.perform(get("/csv"))
+        mockMvc.perform(get("/csv"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(4))

@@ -33,7 +33,7 @@ public class StockControllerTest {
         ProductStockSummary summary2 = new ProductStockSummary("ABC", "Product 2", 99L);
         when(service.StockSummary()).thenReturn(Arrays.asList(summary1, summary2));
 
-        this.mockMvc.perform(get("/stock/summary"))
+        mockMvc.perform(get("/stock/summary"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(2))

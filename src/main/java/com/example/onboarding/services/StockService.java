@@ -1,6 +1,7 @@
 package com.example.onboarding.services;
 
 import com.example.onboarding.models.ProductStock;
+import com.example.onboarding.models.ProductStockExternalResponse;
 import com.example.onboarding.models.ProductStockSummary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -10,37 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/* API endpoint response class */
-class ProductStockResponse {
-    private String digest;
-    private int total;
-    private List<ProductStock> data;
-
-    public String getDigest() {
-        return digest;
-    }
-
-    public void setDigest(String digest) {
-        this.digest = digest;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public List<ProductStock> getData() {
-        return data;
-    }
-
-    public void setData(List<ProductStock> data) {
-        this.data = data;
-    }
-}
-
 @Service
 public class StockService {
     public List<ProductStockSummary> StockSummary() {
@@ -48,11 +18,11 @@ public class StockService {
         String productStockUrl = "https://sandbox.kecak.org/web/json/data/app/emkfast/datalist/productStock";
         RestClient restClient = RestClient.builder().build();
 
-        ProductStockResponse productStockResponse = restClient.get().uri(productStockUrl).retrieve().body(ProductStockResponse.class);
+        ProductStockExternalResponse productStockExternalResponse = restClient.get().uri(productStockUrl).retrieve().body(ProductStockExternalResponse.class);
 
         List<ProductStock> productStocks;
-        if (productStockResponse != null) {
-            productStocks = productStockResponse.getData();
+        if (productStockExternalResponse != null) {
+            productStocks = productStockExternalResponse.getData();
         } else {
             productStocks = new ArrayList<>();
         }
