@@ -17,7 +17,7 @@ public class CSVReaderController {
     @Autowired
     public CSVReaderService csvReaderService;
 
-    @GetMapping("/csvreader")
+    @GetMapping
     public ResponseEntity<List<Employee>> csvReader() {
         List<Employee> result = csvReaderService.CSVReader();
 

@@ -14,6 +14,9 @@ public class ProductStock {
         super();
     }
 
+    public ProductStock() {
+    }
+
     public String getStorageBin$_identifier() {
         return storageBin$_identifier;
     }
@@ -76,5 +79,10 @@ public class ProductStock {
 
     public void set_id(String _id) {
         this._id = _id;
+    }
+
+    @Override
+    public String toString() {
+        return this._id;
     }
 }

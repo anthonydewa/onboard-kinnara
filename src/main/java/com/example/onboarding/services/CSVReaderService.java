@@ -1,11 +1,12 @@
 package com.example.onboarding.services;
 
-import com.example.onboarding.exceptions.InvalidCSVRead;
 import com.example.onboarding.models.Employee;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -36,7 +37,7 @@ public class CSVReaderService {
                     lst.add(employee);
                 }
         } catch (Exception e) {
-            throw new InvalidCSVRead(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage());
         }
 
         return lst;
