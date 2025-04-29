@@ -19,7 +19,7 @@ public class StockController {
 
     @GetMapping("/summary")
     public ResponseEntity<List<ProductStockSummary>> StockSummary() {
-        List<ProductStockSummary> data = stockService.StockSummary();
+        List<ProductStockSummary> data = stockService.stockSummary();
 
         return new ResponseEntity<>(data, HttpStatusCode.valueOf(200));
     }

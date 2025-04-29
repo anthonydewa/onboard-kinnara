@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class StockService {
-    public List<ProductStockSummary> StockSummary() {
+    public List<ProductStockSummary> stockSummary() {
         /*Get JSON data from API endpoint*/
         String productStockUrl = "https://sandbox.kecak.org/web/json/data/app/emkfast/datalist/productStock";
         RestClient restClient = RestClient.builder().build();

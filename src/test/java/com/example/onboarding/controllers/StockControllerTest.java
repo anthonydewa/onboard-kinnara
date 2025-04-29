@@ -31,7 +31,7 @@ public class StockControllerTest {
     void stockSummaryTest() throws Exception {
         ProductStockSummary summary1 = new ProductStockSummary("XYZ", "Product 1", 123L);
         ProductStockSummary summary2 = new ProductStockSummary("ABC", "Product 2", 99L);
-        when(service.StockSummary()).thenReturn(Arrays.asList(summary1, summary2));
+        when(service.stockSummary()).thenReturn(Arrays.asList(summary1, summary2));
 
         mockMvc.perform(get("/stock/summary"))
                 .andExpect(status().isOk())
