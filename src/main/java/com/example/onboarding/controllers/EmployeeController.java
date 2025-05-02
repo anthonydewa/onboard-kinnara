@@ -23,7 +23,7 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Employee> get_by_id(@PathVariable("id") Integer id) {
-        Employee employee = employeeService.employeeGetByIdD(id);
+        Employee employee = employeeService.employeeGetById(id);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 }

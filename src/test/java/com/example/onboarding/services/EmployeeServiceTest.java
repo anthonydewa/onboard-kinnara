@@ -50,7 +50,7 @@ public class EmployeeServiceTest {
         Employee employeeStub = new Employee(1, "ant", "ant@dew.com", "-");
         when(employeeRepository.findById(1)).thenReturn(Optional.of(employeeStub));
 
-        Employee employee = employeeService.employeeGetByIdD(1);
+        Employee employee = employeeService.employeeGetById(1);
 
         Assertions.assertEquals(1, employee.getId());
         Assertions.assertEquals("ant", employee.getName());
@@ -63,7 +63,7 @@ public class EmployeeServiceTest {
     void employeeGetByIDNotFoundTest() {
         when(employeeRepository.findById(100)).thenReturn(Optional.empty());
 
-        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> { employeeService.employeeGetByIdD(100); });
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> { employeeService.employeeGetById(100); });
 
         Assertions.assertEquals("Resource not found", exception.getReason());
         Assertions.assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());

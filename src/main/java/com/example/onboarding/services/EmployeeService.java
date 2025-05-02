@@ -24,7 +24,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee employeeGetByIdD(int id) {
+    public Employee employeeGetById(int id) {
         Optional<Employee> employeeRepo = employeeRepository.findById(id);
 
         if (employeeRepo.isPresent()) {

@@ -52,7 +52,7 @@ public class EmployeeControllerTest {
     @DisplayName("Test GET /employee return 201")
     void employeeGetByIDTest() throws Exception {
         Employee employeeStub = new Employee(1, "ant", "ant@dew.com", "-");
-        when(employeeService.employeeGetByIdD(1)).thenReturn(employeeStub);
+        when(employeeService.employeeGetById(1)).thenReturn(employeeStub);
 
         mockMvc.perform(get("/employee/1"))
                 .andExpect(status().isOk())
